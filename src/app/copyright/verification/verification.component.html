@@ -1,0 +1,106 @@
+<mat-horizontal-stepper class="mat-elevation-z2" #stepper>
+    <mat-step>
+        <ng-template matStepLabel>Upload Certificate</ng-template>
+        <mat-card class="mat-elevation-z0">
+            <mat-card-header>
+                <mat-card-subtitle>Browse/Drop your certificate to verify Copyright</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="certificateDropped($event)"
+                    [multiple]="false" [dropZoneClassName]="'dropZone'" [contentClassName]="'contentClass'">
+                    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                        <div fxLayoutAlign="center center" fxLayout="column">
+                            Drop your certificate to verify Copyright <br>
+                            <button mat-raised-button type="button" color="accent" (click)="openFileSelector()">
+                                <mat-icon>file_upload</mat-icon> &nbsp; Browse Certificate
+                            </button>
+                        </div>
+                    </ng-template>
+                </ngx-file-drop>
+            </mat-card-content>
+            <mat-card-actions align="center">
+                <button mat-raised-button color="primary" [disabled]="certificateError || !certificate" matStepperNext>
+                    Next &nbsp; <mat-icon>arrow_forward</mat-icon>
+                </button>
+            </mat-card-actions>
+            <mat-card-footer>
+                <div class="col-md-6" [ngClass]="{'danger': certificateError, 'success': !certificateError}">
+                    {{certificateText}} <br>
+                </div>
+            </mat-card-footer>
+        </mat-card>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Upload File</ng-template>
+        <mat-card class="mat-elevation-z0">
+            <mat-card-header>
+                <mat-card-subtitle>Browse/Drop your file to verify Copyright</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="fileDropped($event)" [multiple]="false"
+                    [dropZoneClassName]="'dropZone'" [contentClassName]="'contentClass'">
+                    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                        <div fxLayoutAlign="center center" fxLayout="column">
+                            Drop your file to verify Copyright <br>
+                            <button mat-raised-button type="button" color="accent" (click)="openFileSelector()">
+                                <mat-icon>file_upload</mat-icon> &nbsp; Browse File
+                            </button>
+                        </div>
+                    </ng-template>
+                </ngx-file-drop>
+            </mat-card-content>
+            <mat-card-actions align="center">
+                <button mat-raised-button color="accent" [disabled]="fileError || !file" matStepperNext>
+                    <mat-icon>arrow_back</mat-icon>&nbsp; Back
+                </button>
+                <button mat-raised-button color="primary" [disabled]="fileError || !file" matStepperNext>
+                    Next &nbsp; <mat-icon>arrow_forward</mat-icon>
+                </button>
+            </mat-card-actions>
+            <mat-card-footer>
+                <div class="col-md-6" [ngClass]="{'danger': fileError, 'success': !fileError}">
+                    {{fileText}} <br>
+                </div>
+            </mat-card-footer>
+        </mat-card>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Verification</ng-template>
+        <div class="verification" *ngIf="!processing && !verification">
+            <div fxLayout="row">
+                <div fxFlex="50" fxLayout="column" fxLayoutAlign="start center">
+                    <mat-icon color="accent" style="font-size: 200px; height: 200px; width: 200px;">picture_as_pdf
+                    </mat-icon>
+                    <h3>Certificate Name</h3><br>
+                    <h3>{{certificateText}} </h3>
+                </div>
+                <div fxFlex="50" fxLayout="column" fxLayoutAlign="start center">
+                    <mat-icon color="accent" style="font-size: 200px;height: 200px; width: 200px;">attach_file
+                    </mat-icon>
+                    <h3>File Name</h3><br>
+                    <h3>{{fileText}}</h3>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <button fxFlex="50" color="primary" mat-raised-button (click)="verify()">Verify</button>
+            </div>
+        </div>
+        <div class="verification" *ngIf="processing" fxLayout="column nowrap" fxLayoutAlign="center center">
+            <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>Processing your request..
+            Please Wait..
+        </div>
+        <div class="verification" *ngIf="verification && !processing" fxLayout="column nowrap"
+            fxLayoutAlign="start center">
+            <h1>{{verification.status}}</h1>
+            <mat-icon style="font-size: 200px; height: 200px; width: 200px;"
+                [ngClass]="{'success': verification.statusCode === 1, 'danger':  verification.statusCode > 1}">
+                {{verification.statusCode === 1 ? 'check_circle': 'highlight_off'}}
+            </mat-icon>
+            <br><br>
+            <button mat-raised-button (click)="downloadCertificate()" *ngIf="verification.statusCode === 1"
+                color="primary">Download Certificate <mat-icon>file_download</mat-icon></button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

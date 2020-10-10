@@ -1,0 +1,47 @@
+<form [formGroup]="billingForm" (ngSubmit)="onSubmit()" fxLayout="column">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Purchase Token</mat-card-title>
+            <mat-card-subtitle>Buy tokens</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="25px">
+            <mat-form-field fxFlex="calc(50% - 25px)">
+                <input matInput formControlName="name" type="text" required placeholder="Billing Name">
+                <mat-error>Please enter Billing name</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="calc(50% - 25px)">
+                <input matInput formControlName="country" type="text" required placeholder="Country">
+                <mat-error>Country is required</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="calc(50% - 25px)">
+                <input matInput formControlName="city" type="text" required placeholder="City">
+                <mat-error>City is required</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="calc(50% - 25px)">
+                <input matInput formControlName="street" type="text" required placeholder="Street">
+                <mat-error>Street is required</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="calc(50% - 25px)">
+                <input matInput formControlName="pincode" type="number" required placeholder="Pincode">
+                <mat-error>Pincode is required</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="calc(50% - 25px)">
+                <mat-select formControlName="tokens" required placeholder="Tokens">
+                    <mat-option value="5">5 Tokens</mat-option>
+                    <mat-option value="10">10 Tokens</mat-option>
+                    <mat-option value="15">15 Tokens</mat-option>
+                    <mat-option value="20">20 Tokens</mat-option>
+                </mat-select>
+                <mat-hint>Token costs 1$ each</mat-hint>
+                <mat-error>Please enter tokens to be purchased</mat-error>
+            </mat-form-field>
+            <!-- <mat-form-field fxFlex="calc(50% - 25px)">
+                <input matInput [formControl]="cost" type="text" readonly placeholder="Cost">
+            </mat-form-field> -->
+            <br>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button type="submit" color="accent">Submit</button>
+        </mat-card-actions>
+    </mat-card>
+</form>

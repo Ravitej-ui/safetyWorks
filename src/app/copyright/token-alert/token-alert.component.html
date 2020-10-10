@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>{{data.type}}</h1>
+<div mat-dialog-content fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="20px">
+    <span>Your Balance</span>
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+        <mat-icon color="accent" class="mat-48">account_balance_wallet</mat-icon>
+        <span style="font-size: 68px">{{balance}}</span>
+    </div>
+    <span><strong>{{data.cost}}</strong> Tokens required for this action</span>
+    <span *ngIf="data.cost > balance" class="danger">You dont have enough tokens for this action.</span>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button color="warn" [mat-dialog-close]="false">Cancel</button>
+    <button (click)="purchase()" mat-raised-button color="accent">Buy Tokens</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" [disabled]="data.cost > balance">Confirm</button>
+</div>

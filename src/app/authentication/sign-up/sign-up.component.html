@@ -1,0 +1,75 @@
+<div class="register">
+    <mat-card fxFlex.gt-md="70" fxFlex fxLayout.gt-sm="row" fxLayout="column" class="register-form">
+        <div fxFlex fxLayout="column" fxLayoutAlign="center center">
+            <mat-icon color="accent" class="mat-48">copyright</mat-icon>
+        </div>
+        <div fxFlex fxLayout="column">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" fxLayout="column">
+                <mat-form-field>
+                    <mat-icon matPrefix color="primary">face</mat-icon>
+                    <input type="text" matInput formControlName="fullName" placeholder="Full Name" required>
+                    <mat-error
+                        *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched) && fullName.hasError('minlength')">
+                        Full Name should be of minimum 5 character long</mat-error>
+                    <mat-error
+                        *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched) && fullName.hasError('maxlength')">
+                        Full Name can have maximum of 50 characters</mat-error>
+                    <mat-error
+                        *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched) && fullName.hasError('required')">
+                        Full Name is required</mat-error>
+                </mat-form-field>
+                <div fxLayout="column">
+                    <mat-radio-group fxLayoutAlign="space-between center" required formControlName="gender"
+                        name="radio">
+                        <span fxLayout="row" fxLayoutAlign="space-between center">
+                            <mat-icon matPrefix color="primary">person</mat-icon>Gender:
+                        </span>
+                        <mat-radio-button value="Male">Male</mat-radio-button>
+                        <mat-radio-button value="Female">Female</mat-radio-button>
+                        <span></span>
+                    </mat-radio-group>
+                    <mat-error
+                        *ngIf="gender?.invalid && (gender?.dirty || gender?.touched) && fullName.hasError('required')">
+                        Please select Gender</mat-error>
+                    <br>
+                </div>
+                <mat-form-field>
+                    <mat-icon matPrefix color="primary">work</mat-icon>
+                    <input type="text" matInput formControlName="profession" placeholder="Profession" required>
+                    <mat-error>Please enter your proffession</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-icon matPrefix color="primary">email</mat-icon>
+                    <input type="text" matInput formControlName="email" placeholder="Email" required>
+                    <mat-error *ngIf="email.hasError('email')">
+                        Please enter a valid email</mat-error>
+                    <mat-error *ngIf="email.hasError('required')">
+                        Email is required</mat-error>
+                    <mat-error *ngIf="email.hasError('emailTaken')">
+                        Email is already taken</mat-error>
+                </mat-form-field>
+                <mat-form-field class="telinput">
+                    <mat-icon matPrefix color="primary">phone</mat-icon>
+                    <input type="tel" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'in'}"
+                        (hasError)="hasError($event)" (ng2TelOutput)="getNumber($event)"
+                        (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)" matInput
+                        formControlName="phoneNumber" placeholder="Phone Number" required>
+                    <mat-error *ngIf="phoneNumber.hasError('required')">Phone number is required</mat-error>
+                    <mat-error *ngIf="phoneNumber.hasError('phoneNumber')">Phone number is invalid</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-icon matPrefix color="primary">lock</mat-icon>
+                    <input type="password" matInput formControlName="password" placeholder="Password" required>
+                    <mat-error>Please enter password</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-icon matPrefix color="primary">group</mat-icon>
+                    <input type="text" matInput formControlName="referalCode" placeholder="Referal">
+                    <mat-error>Invalid referal code</mat-error>
+                </mat-form-field>
+                <br>
+                <button mat-raised-button type="submit" color="primary">Register</button>
+            </form>
+        </div>
+    </mat-card>
+</div>

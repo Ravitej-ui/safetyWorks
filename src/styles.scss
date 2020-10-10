@@ -1,0 +1,64 @@
+.main {
+  min-height: 99.8vh;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #512da8;
+  font-size: 13px;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  margin: 20px 0;
+  border: 1px solid #fff;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.dropZone {
+  height: 300px;
+  margin: auto;
+  border: 2px dotted #0782d0;
+  border-radius: 30px;
+}
+.contentClass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: #0782d0;
+}
+.tblIcon {
+  height: 70px;
+  width: 70px;
+  margin-bottom: -66px;
+  z-index: 1000;
+  margin-left: 25px;
+  justify-content: center !important;
+  display: flex !important;
+  align-content: center !important;
+}
+
+.tblIcon i {
+  color: #fff;
+  font-size: 40px;
+  line-height: 1.8;
+}
+
+.TableHead {
+  color: rgb(39, 39, 39);
+  margin-bottom: 16px;
+  padding-left: 120px;
+}

@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{data.isPublished? 'Register Successful!' : 'Registration Initiated..'}}</h1>
+<div mat-dialog-content>
+    {{data.isPublished? 'Block Chain has successfully processed your request for file '+ data.fileName 
+    : 'Block Chain has started processing your request for file '+ data.fileName}}
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Close</button>
+</div>

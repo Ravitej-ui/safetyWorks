@@ -1,0 +1,39 @@
+mat-header-cell,
+mat-cell {
+  display: flex;
+  justify-content: center;
+}
+
+.spinner {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  text-align: center;
+}
+
+.TableHead {
+  color: rgb(39, 39, 39);
+  margin-bottom: 16px;
+  font-weight: normal !important;
+}
+
+.SmallFab,
+.SmallFab .mat-button-wrapper {
+  width: 28px;
+  height: 28px;
+  line-height: 14px;
+  padding: 0 !important;
+}
+
+.SmallFab .material-icons {
+  font-size: 14px;
+}
+
+.SmallFab ::ng-deep .mat-button-wrapper {
+  line-height: 14px;
+  padding: 0;
+}
+.SmallFab {
+  margin-right: 2px;
+  margin-left: 2px;
+}

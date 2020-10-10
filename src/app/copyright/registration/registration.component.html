@@ -1,0 +1,101 @@
+<mat-horizontal-stepper class="mat-elevation-z2" #stepper linear>
+    <mat-step [stepControl]="fileFormArray">
+        <ng-template matStepLabel>Upload File</ng-template>
+        <mat-card class="mat-elevation-z0">
+            <mat-card-header>
+                <mat-card-subtitle>Browse/Drop file below to register for Copyright</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" [multiple]="true"
+                    [dropZoneClassName]="'dropZone'" [contentClassName]="'contentClass'">
+                    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                        <div fxLayoutAlign="center center" fxLayout="column">
+                            Drop your file here to register for Copyright <br>
+                            <button mat-raised-button type="button" color="accent" (click)="openFileSelector()"
+                                mdbWavesEffect>
+                                <mat-icon>file_upload</mat-icon> &nbsp; Browse File
+                            </button>
+                        </div>
+                    </ng-template>
+                </ngx-file-drop>
+            </mat-card-content>
+            <mat-card-actions align="center">
+                <button mat-raised-button color="primary" [disabled]="files.length < 1" matStepperNext>
+                    Next &nbsp; <mat-icon>arrow_forward</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Register Files</ng-template>
+        <div class="verification">
+            <mat-card class="mat-elevation-z0">
+                <mat-card-content class="verification">
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <button mat-raised-button (click)="registerAll()" color="primary">Register all files</button>
+                                </th>
+                                <th>
+                                    <button mat-raised-button (click)="clearAll()" color="accent">Clear all files</button>
+                                </th>
+                                <th>
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr [formGroup]="fileFormArray" *ngFor="let control of fileFormArray.controls; let i=index">
+                                <ng-container [formGroupName]="i">
+                                    <td width="25">
+                                        <mat-form-field style="width: 100%">
+                                            <input matInput readonly formControlName="fileName" type="text" required
+                                                placeholder="File name">
+                                            <mat-error>File Name is required</mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td width="25">
+                                        <mat-form-field style="width: 100%">
+                                            <input [readonly]="fileFormArray.controls[i].value['isUploaded']" matInput
+                                                formControlName="note" type="text" placeholder="File note">
+                                            <mat-hint>Any note for this file</mat-hint>
+                                        </mat-form-field>
+                                    </td>
+                                    <td width="25">
+                                      <mat-form-field style="width: 100%">
+                                        <mat-select formControlName="classificationId" placeholder="Classification">
+                                            <mat-option *ngFor="let cl of classy" [value]="cl.classificationID" [matTooltip]="cl.details">{{cl.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-hint>Classification of this file</mat-hint>
+                                    </mat-form-field>
+                                    </td>
+                                    <td width="25" align="center" class="centerAll">
+                                        <button *ngIf="!fileFormArray.controls[i].value['isUploaded'] && !fileFormArray.controls[i].value['isInProgress'] &&
+                                            !fileFormArray.controls[i].value['failed']" style="margin-right: 10px" mat-raised-button
+                                            (click)="register(i)" color="primary">Register</button>
+                                        <button *ngIf="!fileFormArray.controls[i].value['isUploaded'] && !fileFormArray.controls[i].value['isInProgress'] &&
+                                            !fileFormArray.controls[i].value['failed']" mat-raised-button
+                                            (click)="remove(i)" color="accent">Remove</button>
+                                        <span class="accent-color"
+                                            *ngIf="fileFormArray.controls[i].value['isInProgress']">Processing..</span>
+                                        <span class="success" *ngIf="fileFormArray.controls[i].value['isUploaded']">In
+                                            Queue..</span>
+                                        <span class="danger"
+                                            *ngIf="fileFormArray.controls[i].value['failed']">Failed.</span>
+                                    </td>
+                                </ng-container>
+                            </tr>
+                        </tbody>
+                    </table>
+                </mat-card-content>
+                <mat-card-actions align="center">
+                    <!-- <button mat-raised-button color="accent" matStepperPrevious>
+                        <mat-icon>arrow_back</mat-icon>&nbsp; Back
+                    </button> -->
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

@@ -1,0 +1,31 @@
+.register {
+  width: 100%;
+  min-height: 600px;
+  height: 85vh;
+  background-position: top;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  overflow: auto;
+}
+mat-card h2 {
+  color: #3c4858;
+  text-decoration: none;
+  font-weight: 300 !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5em;
+}
+.register-form{
+  min-width: 300px;
+}
+.mat-48{
+  font-size: 300px;
+  height: 300px;
+  width: 300px;
+}
+.telinput:not(.mat-form-field-should-float) ::ng-deep label {
+  padding-left: 50px !important;
+  box-sizing: border-box;
+}

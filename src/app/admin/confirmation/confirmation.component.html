@@ -1,0 +1,14 @@
+<h1 matDialogTitle [ngClass]="[data.isDisabled? 'success' : 'danger']">{{data.isDisabled? 'Enable ' : 'Disable '}} {{data.fullName}}</h1>
+
+<mat-dialog-content>
+        {{data.isDisabled? 'This action will enable this user to login and use all functionality..' : 'This action will disable this user from login and use any functionality..'}}
+</mat-dialog-content>
+<br>
+<mat-dialog-actions [attr.align]="'start'">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-raised-button (click)="approve()" [color]="data.isDisabled? 'primary' : 'warn'">{{data.isDisabled? 'Enable ' : 'Disable '}}</button>
+</mat-dialog-actions>
+<br>
+<br>
+<br>
+<br>

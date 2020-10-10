@@ -1,0 +1,43 @@
+<div class="login2Container">
+    <div *ngIf="showSpinner" class="LoginContainer centerAll">
+        <mat-spinner></mat-spinner><br />
+    </div>
+    <div *ngIf="!showSpinner" class="LoginContainer">
+        <mat-card fxFlexAlign="center center" class="cardTop gradient-bg-1">
+            <h3>Login</h3>
+        </mat-card>
+        <mat-card fxFlexAlign="center center" class="cardBody">
+            <form [formGroup]="loginForm" fxLayout="column" (ngSubmit)="onSubmit()">
+                <div fxLayout="row" class="centerAll">
+                    <mat-icon color="primary" class="material-icons">
+                        mail_outline
+                    </mat-icon>
+                    <mat-form-field fxFlex="80%">
+                        <input formControlName="email" required matInput placeholder="Email...">
+                        <mat-error *ngIf="email.hasError('email')">
+                            Please enter a valid email</mat-error>
+                        <mat-error *ngIf="email.hasError('required')">
+                            Email is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" class="centerAll">
+                    <mat-icon color="primary" class="material-icons">
+                        lock_outline
+                    </mat-icon>
+                    <mat-form-field fxFlex="80%">
+                        <input formControlName="password" required matInput placeholder="Password..."
+                            [type]="show ? 'text' : 'password'">
+                        <mat-icon color="primary" matSuffix (click)="hide= !hide">{{show ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-error *ngIf="password.hasError('required')">
+                            Password is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <a fxFlexAlign="center" class="fpLink" routerLink="/forgotpassword">forgot password?</a>
+                <br>
+                <div class="centerAll">
+                    <button mat-stroked-button color="primary" type="submit" value="submit" mat-button>Login</button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>

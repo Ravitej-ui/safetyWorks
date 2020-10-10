@@ -1,0 +1,378 @@
+<ngx-loading-bar [color]="'#B0BEC5'"></ngx-loading-bar>
+<mat-drawer-container class="main" [ngClass]="{'mat-app-background': !isDark, 'unicorn-dark-theme': isDark}"
+  [hasBackdrop]="isSmall" autosize>
+  <mat-drawer #drawer class="sidenav" [mode]="isSmall? 'over' : 'side'">
+    <ng-scrollbar *ngIf="!specialPage" #sideScroll class="my-scrollbar" id="sideScroll">
+      <app-navigation ></app-navigation>
+    </ng-scrollbar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <ng-scrollbar #mainScroll class="my-scrollbar" id="mainScroll">
+      <mat-toolbar color="primary" class="mat-elevation-z11 nav-toolbar">
+        <mat-toolbar-row fxLayoutGap="20px">
+          <button *ngIf="isSmall && !specialPage" (click)="drawer.open()" mat-icon-button>
+            <mat-icon>menu</mat-icon>
+          </button>
+          <button (click)="goBack()" mat-icon-button>
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <a routerLink=''>Copyright App</a>
+          <span class="spacer"></span>
+          <span *ngIf="isLoggedIn" fxLayout="row wrap" fxLayoutGap="5px" fxLayoutAlign="center center">
+            <mat-icon class="mat-18">account_balance_wallet</mat-icon>
+            <span>{{balance}}</span>
+            <span style="font-size: 12px">Tokens</span>
+          </span>
+          <div *ngIf="isLoggedIn" class="menu-with-name" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="gappx"
+            mat-button [matMenuTriggerFor]="menu">
+            <div class="profile-image">{{initials}}</div>
+            <span>{{userName}}</span>
+            <mat-icon>more_vert</mat-icon>
+          </div>
+          <a *ngIf="!isLoggedIn" mat-button routerLinkActive="hidden" routerLink="login">
+            <mat-icon>lock_open</mat-icon>&nbsp;Login
+          </a>
+          <a *ngIf="!isLoggedIn" mat-button routerLinkActive="hidden" routerLink="signup">
+            <mat-icon>edit</mat-icon>&nbsp;Sign Up
+          </a>
+         
+          <mat-menu #menu="matMenu">
+            <button routerLink="profile" mat-menu-item>
+              <mat-icon>face</mat-icon>
+              <span>Profile</span>
+            </button>
+            <button routerLink="changepassword" mat-menu-item>
+              <mat-icon>security</mat-icon>
+              <span>Change Password</span>
+            </button>
+            <button (click)="logOut()" mat-menu-item>
+              <mat-icon>lock</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-toolbar color="accent" class="back-toolbar">
+      </mat-toolbar>
+      <div class="outlet">
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer *ngIf="!specialPage"></app-footer>
+    </ng-scrollbar>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="unicorn-dark-theme">
+  <button mat-raised-button (click)="onClick" color="primary">Action</button>
+  <button mat-raised-button (click)="onClick" color="accent">Accent</button>
+  <button mat-raised-button (click)="onClick" color="warn">Warn</button>
+</div>
+<div class="mat-app-background">
+  <button mat-raised-button (click)="onClick" color="primary">Action</button>
+  <button mat-raised-button (click)="onClick" color="accent">Accent</button>
+  <button mat-raised-button (click)="onClick" color="warn">Warn</button>
+</div> -->
+
+
+<!-- <div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper valign-wrapper blue darken-3">
+      <img src="assets/img/nem_logo100x100.png" height="20" width="20" style="margin-left: 1.5em " />
+      <span style="margin-left: 0.5em"><a href="https://nemlibrary.com">NEM Library </a>Angular 4 Seed</span>
+    </div>
+  </nav>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <div class="card  blue lighten-2">
+        <div class="card-content white-text">
+          <span class="card-title">Attention</span>
+          <p>
+            The issue with <b>HTTPS</b> is solved. 😄
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m12 l4 xl4">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Transactions List</span>
+          <span>Fetch the transaction list for an account</span>
+          <br/><span style="color: darkred"><b>Just testnet</b></span>
+          <p>
+            Sample address:
+          </p>
+          <code>
+            TDM3DO-ZM5WJ3-ZRBPSM-YRU6JS-WKUCAH-5VIPOF-4W7K
+          </code>
+          <div class="input-field">
+            <input #address_transactions id="address_transactions_input" type="text">
+            <label for="address_transactions_input">Address</label>
+          </div>
+          <div class="input-field center-align">
+            <button class="waves-effect waves-light btn" (click)="startFetchingTransactions(address_transactions.value)">
+              <i class="material-icons tiny">send</i>Fetch
+            </button>
+          </div>
+          <ul class="collection">
+            <li class="collection-item" *ngFor="let transaction of allTransactions">
+              Signer: <span class="truncate"> {{transaction.signer.address.pretty()}} </span> Type: {{transaction.type}}
+              <br/> Timestamp: {{transaction.timeWindow.timeStamp.toString()}}
+            </li>
+          </ul>
+          <a *ngIf="allTransactionsActive" class="waves-effect waves-light btn" (click)="fetchMoreTransactions()">next 5 transactions</a>
+        </div>
+        <div class="card-action">
+          <a href="https://nemlibrary.com/guide/account/#how-to-receive-all-transactions-for-an-account" target="_blank">
+            View documentation
+          </a>
+          <a target="_blank" href="https://github.com/guillemsole/nem-library-angular2-seed/blob/master/src/app/app.component.ts#L38-L60">View Source Code</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m12 l4 xl4">
+      <div class="card">
+        <div class="card-content">
+          <div class="preloader-wrapper small active right" *ngIf="unconfirmedTransactionsActive">
+            <div class="spinner-layer spinner-green-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div>
+              <div class="gap-patch">
+                <div class="circle"></div>
+              </div>
+              <div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+          <span class="card-title">Listen unconfirmed transactions</span>
+          <p>
+            Listen the unconfirmed transactions for an account. When you start listening, send a transaction to the address you have
+            introduced.
+            <br/><span style="color: darkred"><b>Just testnet</b></span>
+          </p>
+          <br/>
+          <p>
+            Sample address:
+          </p>
+          <code>
+            TDM3DO-ZM5WJ3-ZRBPSM-YRU6JS-WKUCAH-5VIPOF-4W7K
+          </code>
+          <div class="">
+            <div class="switch">
+              <label>
+                Off
+                <input type="checkbox"
+                       [disabled]="!unconfirmedTransactionsActive"
+                       [checked]="unconfirmedTransactionsActive"
+                       (click)="stopUnconfirmedListener()">
+                <span class="lever"></span>
+                On
+              </label>
+            </div>
+            <div class="input-field">
+              <input #address id="address_input" type="text">
+              <label for="address_input">Address</label>
+            </div>
+            <div class="input-field center-align">
+              <button class="waves-effect waves-light btn" (click)="start(address.value)">
+                <i class="material-icons tiny">send</i> Start
+              </button>
+            </div>
+          </div>
+          <ul class="collection">
+            <li class="collection-item" *ngFor="let transaction of incomingTransactions">
+              Signer: <span class="truncate"> {{transaction.signer.address.pretty()}} </span> Type: {{transaction.type}}
+            </li>
+          </ul>
+        </div>
+        <div class="card-action">
+          <a href="https://nemlibrary.com/guide/listener/#how-to-create-a-listener-for-unconfirmed-transactions-information" target="_blank">
+            View documentation
+          </a>
+          <a target="_blank" href="https://github.com/guillemsole/nem-library-angular2-seed/blob/master/src/app/app.component.ts#L87-L105">View Source Code</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m12 l4 xl4">
+      <div class="card">
+        <div class="card-content">
+          <div class="preloader-wrapper small active right" *ngIf="blockListenerActive">
+            <div class="spinner-layer spinner-green-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div>
+              <div class="gap-patch">
+                <div class="circle"></div>
+              </div>
+              <div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+          <span class="card-title">
+            New blocks listener
+          </span>
+          
+          <div class="switch">
+            <label>
+              Off
+              <input type="checkbox"
+                     [checked]="blockListenerActive"
+                     (click)="changeBlockListener()">
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+          <br/>
+          <p>
+            The application listens the NEM Blockchain for new blocks. When a new block is included in the blockchain, the the method
+            is triggered and we receive it automatically.
+          </p>
+          <p>
+            Just wait a minute, and you will see a new block.
+          </p>
+
+          <ul class="collection">
+            <li class="collection-item" *ngFor="let block of blocks">
+              Height: {{block.height}} <br/> Number of transactions: {{block.transactions.length}}
+            </li>
+          </ul>
+        </div>
+        <div class="card-action">
+          <a href="https://nemlibrary.com/guide/listener/#how-to-create-a-listener-for-new-blocks-information" target="_blank">
+            View documentation
+          </a>
+
+          <a target="_blank" href="https://github.com/guillemsole/nem-library-angular2-seed/blob/master/src/app/app.component.ts#L62-L85">View Source Code</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="page-footer blue darken-3">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">NEM Library</h5>
+        <p class="grey-text text-lighten-4"></p>
+      </div>
+      <div class="col l3 s12">
+        <h5 class="white-text">References</h5>
+        <ul>
+          <li><a class="white-text" href="https://nemlibrary.com" target="_blank">
+            <i class="material-icons tiny">link</i>
+            nem library documentation</a></li>
+          <li><a class="white-text" href="https://github.com/aleixmorgadas/nem-library-examples" target="_blank">
+            <i class="material-icons tiny">link</i>
+            nem library examples</a></li>
+          <li><a class="white-text" href="https://github.com/guillemsole/nem-library-angular2-seed" target="_blank">
+            <i class="material-icons tiny">link</i>
+            angular seed repository</a></li>
+          <li><a class="white-text" href="https://github.com/guillemsole/nem-library-ionic2-seed" target="_blank">
+            <i class="material-icons tiny">link</i>
+            ionic seed repository</a></li>
+        </ul>
+      </div>
+      <div class="col l3 s12">
+        <h5 class="white-text">Connect</h5>
+        <ul>
+
+          <li><a class="white-text" href="https://twitter.com/gsolecubilo" target="_blank">
+            <img width="20" height="20" src="assets/img/twitter_logo_600x600.png">
+            Guillem's Twitter
+          </a></li>
+          <li><a class="white-text" href="https://twitter.com/aleix_mp" target="_blank">
+            <img width="20" height="20" src="assets/img/twitter_logo_600x600.png">
+            Aleix's Twitter</a></li>
+          <li><a class="white-text" href="https://medium.com/@gsolecubilo" target="_blank">
+            <img width="20" height="20" src="assets/img/medium.png">
+            Guillem's Medium</a></li>
+          <li><a class="white-text" href="https://medium.com/@aleixmorgadas" target="_blank">
+            <img width="20" height="20" src="assets/img/medium.png">
+            Aleix's Medium</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      2017 <a href="https://nemlibrary.com" style="color: white"> nemlibrary.com </a> Made with ❤️ in Barcelona.
+    </div>
+  </div>
+</footer> -->

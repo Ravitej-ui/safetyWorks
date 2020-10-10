@@ -1,0 +1,80 @@
+<div style="height: 73vh" *ngIf="!user" fxLayout="column nowrap" fxLayoutAlign="center center">
+        <mat-progress-spinner class="spinner" mode="indeterminate" color="primary">
+        </mat-progress-spinner> Loading...
+    </div>
+    <mat-card *ngIf="user">
+        <mat-card-header>
+            <mat-card-title>{{user.fullName}}'s Profile</mat-card-title>
+            <!-- <mat-card-subtitle>You can edit your profile by clicking on edit button bellow</mat-card-subtitle> -->
+        </mat-card-header>
+        <mat-card-content style="padding-left: 30px" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="20px">
+            <div fxFlex="calc(50% -20px)" fxFlex.lt-md="100" fxLayout="row nowrap" fxLayoutAlign="start center"
+                fxLayoutGap="20px" style="padding: 20px 0">
+                <mat-icon class="mat-48">face</mat-icon>
+                <div fxLayout="column nowrap" fxLayoutAlign="start start" fxLayoutGap="5px">
+                    <span class="sub primary-color">Full Name</span>
+                    <span class="def accent-color">{{user.fullName}}</span>
+                </div>
+            </div>
+            <div fxFlex="calc(50% -20px)" fxFlex.lt-md="100" fxLayout="row nowrap" fxLayoutAlign="start center"
+                fxLayoutGap="20px" style="padding: 20px 0">
+                <mat-icon class="mat-48">person</mat-icon>
+                <div fxLayout="column nowrap" fxLayoutAlign="start start" fxLayoutGap="5px">
+                    <span class="sub primary-color">Gender</span>
+                    <span class="def accent-color">{{user.gender}}</span>
+                </div>
+            </div>
+            <div fxFlex="calc(50% -20px)" fxFlex.lt-md="100" fxLayout="row nowrap" fxLayoutAlign="start center"
+                fxLayoutGap="20px" style="padding: 20px 0">
+                <mat-icon class="mat-48">email</mat-icon>
+                <div fxLayout="column nowrap" fxLayoutAlign="start start" fxLayoutGap="5px">
+                    <span class="sub primary-color">Email</span>
+                    <span class="def accent-color">{{user.email}}</span>
+                </div>
+            </div>
+            <div fxFlex="calc(50% -20px)" fxFlex.lt-md="100" fxLayout="row nowrap" fxLayoutAlign="start center"
+                fxLayoutGap="20px" style="padding: 20px 0">
+                <mat-icon class="mat-48">phone</mat-icon>
+                <div fxLayout="column nowrap" fxLayoutAlign="start start" fxLayoutGap="5px">
+                    <span class="sub primary-color">Phone Number</span>
+                    <span class="def accent-color">{{user.phoneNumber}}</span>
+                </div>
+            </div>
+            <div fxFlex="calc(50% -20px)" fxFlex.lt-md="100" fxLayout="row nowrap" fxLayoutAlign="start center"
+                fxLayoutGap="20px" style="padding: 20px 0">
+                <mat-icon class="mat-48">work</mat-icon>
+                <div fxLayout="column nowrap" fxLayoutAlign="start start" fxLayoutGap="5px">
+                    <span class="sub primary-color">Profession</span>
+                    <span class="def accent-color">{{user.profession}}</span>
+                </div>
+            </div>
+            <div fxFlex="calc(50% -20px)" fxFlex.lt-md="100" fxLayout="row nowrap" fxLayoutAlign="start center"
+                fxLayoutGap="20px" style="padding: 20px 0">
+                <mat-icon class="mat-48">code</mat-icon>
+                <div fxLayout="column nowrap" fxLayoutAlign="start start" fxLayoutGap="5px">
+                    <span class="sub primary-color">Referal Code</span>
+                    <span class="def accent-color">{{user.referalCode}}</span>
+                </div>
+            </div>
+            <div fxFlex="calc(50% -20px)" fxFlex.lt-md="100" fxLayout="row nowrap" fxLayoutAlign="start center"
+                fxLayoutGap="20px" style="padding: 20px 0">
+                <mat-icon class="mat-48">style</mat-icon>
+                <div fxLayout="column nowrap" fxLayoutAlign="start start" fxLayoutGap="5px">
+                    <span class="sub primary-color">Tokens</span>
+                    <span class="def accent-color">{{user.tokens}}</span>
+                </div>
+            </div>
+            <div fxFlex="calc(50% -20px)" fxFlex.lt-md="100" fxLayout="row nowrap" fxLayoutAlign="start center"
+                fxLayoutGap="20px" style="padding: 20px 0">
+                <mat-icon class="mat-48">local_offer</mat-icon>
+                <div fxLayout="column nowrap" fxLayoutAlign="start start" fxLayoutGap="5px">
+                    <span class="sub primary-color">Referal Points</span>
+                    <span class="def accent-color">{{user.referalPoints}}</span>
+                </div>
+            </div>
+            <br>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            
+        </mat-card-actions>
+    </mat-card>

@@ -1,0 +1,79 @@
+<div class="SideListCont">
+    <div class="ilogo">
+        <img src="../../../assets/appimages/logo-demo.jpg" width="160px">
+    </div>
+    <mat-accordion class="CustomSideNav">
+        <mat-expansion-panel class="userInfo mat-elevation-z0" (afterCollapse)="resize()" (afterExpand)="resize()">
+            <mat-expansion-panel-header [collapsedHeight]="'48px'" [expandedHeight]="'48px'">
+                <div class="profIcon">
+                    <i class="material-icons">
+                        person_add
+                    </i>
+                </div>
+                <div class="allCenter">
+                    {{userName | titlecase}}
+                </div>
+            </mat-expansion-panel-header>
+            <mat-nav-list class="headList">
+                <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="myreferals"><span
+                        class="linkHead">REF</span> <span class="linkBody">Referals</span> </a>
+                <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="transactions"><span
+                        class="linkHead">TRN</span> <span class="linkBody">Transactions</span> </a>
+            </mat-nav-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel *ngIf="admin" class="mat-elevation-z0" (afterCollapse)="resize()" (afterExpand)="resize()">
+            <mat-expansion-panel-header [collapsedHeight]="'48px'" [expandedHeight]="'48px'">
+                <span style="margin-left: 5px" class="linkHead material-icons">table_chart</span>
+                <span class="linkBody"> Admin </span>
+            </mat-expansion-panel-header>
+            <mat-nav-list class="headList">
+                <!-- <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="admin/dashboard"><span
+                        class="linkHead">AD</span>
+                    <span class="linkBody">Dashboard</span>
+                </a> -->
+                <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="admin/alltransactions"><span
+                        class="linkHead">AT</span>
+                    <span class="linkBody">All Transactions</span>
+                </a>
+                <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="admin/billings"><span
+                        class="linkHead">BS</span>
+                    <span class="linkBody">Billings</span>
+                </a>
+                <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="admin/manageusers"><span
+                        class="linkHead">MU</span>
+                    <span class="linkBody">Manage Users</span>
+                </a>
+                <!-- <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="admin/nemtransactions"><span
+                        class="linkHead">NT</span>
+                    <span class="linkBody">Nem Transactions</span>
+                </a> -->
+            </mat-nav-list>
+        </mat-expansion-panel>
+        <mat-nav-list class="headList">
+            <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="dashboard"><span
+                    class="linkHead material-icons">dashboard</span>
+                <span class="linkBody">Dashboard</span>
+            </a>
+            <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="purchase"><span
+                    class="linkHead material-icons">shopping_cart</span>
+                <span class="linkBody">Purchase Tokens</span>
+            </a>
+            <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="register"><span class="linkHead
+                material-icons">copyright</span>
+                <span class="linkBody">Register Copyright</span>
+            </a>
+            <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="verify"><span class="linkHead
+                material-icons">verified_user</span>
+                <span class="linkBody">Verify Copyright</span>
+            </a>
+            <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="myregistrations"><span class="linkHead
+                    material-icons">work</span>
+                <span class="linkBody">My Registrations</span>
+            </a>
+            <a mat-list-item routerLinkActive="activee mat-elevation-z11" routerLink="myverifications"><span class="linkHead
+                material-icons">security</span>
+                <span class="linkBody">My Verifications</span>
+            </a>
+        </mat-nav-list>
+    </mat-accordion>
+</div>

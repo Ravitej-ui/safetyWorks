@@ -1,0 +1,59 @@
+<div class="spinner" *ngIf="loading">
+    <mat-spinner></mat-spinner> Loading data please wait...
+</div>
+<div class="tblCont" [hidden]="loading">
+    <mat-card class="gradient-bg-1 tblIcon mat-elevation-z8">
+        <i class="material-icons">
+            table_chart
+        </i>
+    </mat-card>
+    <mat-card>
+        <div class="dataContainer">
+            <div class="row">
+                <h2 class="TableHead">Verifications</h2>
+            </div>
+            <div>
+                <mat-form-field style="width:100%" *ngIf="dataSource.data.length> 10">
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+            <div>
+
+                <mat-table #table [dataSource]="dataSource" matSort>
+
+                    <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> {{formatHeader(col) | titlecase}}
+                        </mat-header-cell>
+                        <ng-container [ngSwitch]="col">
+                            <ng-container *ngSwitchCase="'registrationDate'">
+                                <mat-cell *matCellDef="let data">
+                                    {{data.registrationDate  | date:'dd MMM yyyy'}} </mat-cell>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'verificationDate'">
+                                <mat-cell *matCellDef="let data">
+                                    {{data.verificationDate  | date:'dd MMM yyyy'}} </mat-cell>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'status'" >
+                                <mat-cell *matCellDef="let data" [ngClass]="{'success': data.statusCode === 1, 'danger': data.statusCode > 1}"> {{data.status}}</mat-cell>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'actions'">
+                                <mat-cell *matCellDef="let data">
+                                    <button mat-raised-button color="accent" *ngIf="data.statusCode === 1"
+                                        (click)="downloadCertificate(data.verificationID)">
+                                        Download Certificate <mat-icon color="primary">file_download</mat-icon>
+                                    </button>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container *ngSwitchDefault>
+                                <mat-cell *matCellDef="let data">{{data[col]}}</mat-cell>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator #paginatoR [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+                </mat-paginator>
+            </div>
+        </div>
+    </mat-card>

@@ -1,0 +1,73 @@
+<div class="spinner" *ngIf="loading">
+    <mat-spinner></mat-spinner> Loading data please wait...
+</div>
+<div class="tblCont" [hidden]="loading">
+    <mat-card class="gradient-bg-1 tblIcon mat-elevation-z8">
+        <i class="material-icons">
+            table_chart
+        </i>
+    </mat-card>
+    <mat-card>
+        <div class="dataContainer">
+            <div class="row">
+                <h2 class="TableHead">All Transactions</h2>
+            </div>
+            <div>
+                <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker" formControlName="fromDate" placeholder="Choose from date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker2" formControlName="toDate" placeholder="Choose to date">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                    <button mat-raised-button type="submit" color="primary">
+                        <mat-icon>filter_list</mat-icon> Filter
+                    </button>
+                </form>
+            </div>
+            <div>
+                <mat-form-field style="width:100%" *ngIf="dataSource.data.length> 10">
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+            <div>
+
+                <mat-table #table [dataSource]="dataSource" matSort>
+
+                    <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> {{formatHeader(col) | titlecase}}
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let data">
+                            <ng-container [ngSwitch]="col">
+                                <ng-container *ngSwitchCase="'transactionDateTime'">
+                                    {{data.transactionDateTime | date:'dd MMM yyyy'}}
+                                </ng-container>
+                                <ng-container *ngSwitchCase="'tokens'">
+                                    <span>{{data.tokens}}</span>
+                                    <mat-icon [ngClass]="[data.isCredit? 'success':'danger']">
+                                        {{data.isCredit? 'arrow_upward': 'arrow_downward'}}</mat-icon>
+                                </ng-container>
+                                <ng-container *ngSwitchCase="'certificate'">
+                                    <button *ngIf="data.isPublished" mat-raised-button color="accent" >
+                                        Download Certificate <mat-icon color="primary">file_download</mat-icon>
+                                    </button>
+                                    <span *ngIf="!data.isPublished" class="accent">In Queue...</span>
+                                </ng-container>
+                                <ng-container *ngSwitchDefault>
+                                    {{data[col]}}
+                                </ng-container>
+                            </ng-container>
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator #paginatoR [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+                </mat-paginator>
+            </div>
+        </div>
+    </mat-card>

@@ -1,0 +1,136 @@
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$light-primary: mat-palette($mat-purple);
+$light-accent: mat-palette($mat-blue-grey, A200, A100, A400);
+// The warn palette is optional (defaults to red).
+$light-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
+
+$light-success: mat-palette($mat-green);
+
+
+.primary-color{
+  color: mat-color($light-primary) !important;
+}
+
+.accent-color {
+  color: mat-color($light-accent) !important;
+}
+.success {
+  color: mat-color($light-success) !important;
+}
+.danger {
+  color: mat-color($light-warn) !important;
+}
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($light-theme);
+
+.CustomSideNav .mat-nav-list a {
+  color: #3c4858;
+}
+
+mat-nav-list a:hover {
+  color: rgb(255, 255, 255);
+  background: #e0e0e0;
+}
+
+mat-nav-list a:focus {
+  background: mat-color($light-primary);
+}
+
+.activee,
+.activee:hover {
+  background: mat-color($light-primary) !important;
+  color: #fff !important;
+}
+
+::ng-deep .CustomSideNav .mat-expansion-panel-header .mat-expansion-indicator::after,
+.CustomSideNav .mat-panel-title {
+  color: #3c4858 !important;
+}
+
+.CustomSideNav .mat-expansion-panel-header:not([aria-disabled="true"]):hover,
+.CustomSideNav .mat-expansion-panel-header.mat-expanded,
+.CustomSideNav .mat-expansion-panel-header.mat-expanded:hover {
+  background: #e0e0e0;
+}
+.mat-expansion-panel,
+.CustomSideNav .mat-expansion-panel-header.mat-expanded,
+.CustomSideNav .mat-expansion-panel-header.mat-expanded:hover {
+  color: #3c4858 !important;
+}
+
+.userInfo {
+  border-color: rgb(172, 172, 172);
+}
+
+.my-scrollbar {
+  min-height: 100vh;
+  min-width: 260px;
+  --scrollbar-gap: 4px !important;
+  --scrollbar-color: #fff !important;
+  --scrollbar-thumb-color: rgba(155, 39, 176, 0.685) !important;
+  --scrollbar-thumb-hover-color: #9c27b0 !important;
+  --scrollbar-size: 4px !important;
+  --scrollbar-padding: 0px !important;
+}
+
+.gradient-bg-1{
+  background-image: linear-gradient(-90deg, rgb(130, 27, 148), #c767d8);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$dark-warn: mat-palette($mat-deep-orange);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+// Include the alternative theme styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
+.unicorn-dark-theme {
+  @include angular-material-theme($dark-theme);
+}

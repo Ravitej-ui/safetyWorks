@@ -1,0 +1,84 @@
+.headList{
+    min-width: 220px;
+}
+
+.CustomSideNav mat-nav-list{
+    padding:0px;
+}
+
+::ng-deep .CustomSideNav .mat-expansion-panel-content .mat-expansion-panel-body {
+    padding: 0px 0px 0px 0px; 
+}
+
+.CustomSideNav mat-nav-list a{
+    font-size: 14px;
+    border-radius: 2px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    transition: 0.5s;
+}
+
+mat-nav-list a:hover{
+    font-size: 14px;
+}
+
+.CustomSideNav mat-expansion-panel, .CustomSideNav mat-expansion-panel-header{
+    background-color: transparent;
+    width: 100%;
+}
+
+::ng-deep .CustomSideNav .mat-expansion-panel-header .mat-content{
+    max-width: 205px;
+}
+
+::ng-deep .CustomSideNav mat-expansion-panel .mat-expansion-panel-header{
+    padding-left: 10px;
+    font-size: 14px;
+    border-radius: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.SideListCont{
+    padding: 12px;
+}
+.ilogo{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.userInfo{
+    width: 100%;
+    border-top: 1px;
+    border-bottom: 1px;
+    border-style: solid;
+    border-left: 0;
+    border-right: 0;
+}
+.allCenter{
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    font-size: 14px;
+    overflow: hidden;
+    max-width: 150px;
+}
+.profIcon{
+    margin-right: 10px;
+}
+.linkHead{
+    padding-right: 10px;
+    padding-left: 0px;
+    width: 40px;
+}
+.linkBody{
+    padding-left: 10px;
+    display:flex;
+    justify-content:left;
+    align-items:center;
+    overflow: hidden;
+}
+.mat-expansion-panel-spacing{
+    margin: 0;
+}
